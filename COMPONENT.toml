@@ -1,16 +1,16 @@
 [component]
 name = "SigmaOS-api-gateway"
-tier = 2
-stability = "scaffold"
+tier = 3
+stability = "beta"
 language = "rust"
-description = "No GitHub description is set; component scope remains unclassified."
+description = "Simple API gateway with route-based request routing and middleware"
 upstream = []
 
 [contract]
-provides = ["component"]
+provides = ["api-gateway", "routing", "middleware"]
 depends_on = []
 
 [maturity]
-status = "Scaffold"
-test_evidence = "Compiles and passes AAA unit tests"
-next_milestone = "Hardware and runtime integration"
+status = "Implemented"
+test_evidence = "cargo test --offline unit tests pass"
+next_milestone = "Path parameters, regex matching, and async handlers"

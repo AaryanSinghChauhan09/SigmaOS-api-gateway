@@ -1,22 +1,16 @@
-use anyhow::Result;
+use sigmaos_api_gateway::{ApiGateway, Request, Response};
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[test]
+fn test_basic_gateway_aaa() {
+    // Arrange
+    let mut gw = ApiGateway::new();
+    gw.add_route("/test", |_| Ok(Response::ok()));
 
-    #[test]
-    fn test_basic_functionality() -> Result<()> {
-        let config = Config::default();
-        let result = config.process();
-        assert!(result.is_ok());
-        Ok(())
-    }
+    // Act
+    let req = Request::new("GET", "/test");
+    let res = gw.handle(req);
 
-    #[test]
-    fn test_error_handling() -> Result<()> {
-        let invalid_config = Config::new("invalid");
-        let result = invalid_config.process();
-        assert!(result.is_ok());
-        Ok(())
-    }
+    // Assert
+    assert!(res.is_ok());
+    assert_eq!(res.unwrap().status, 200);
 }
